@@ -8,7 +8,12 @@ const forecast =(lat, long, callback) => {
         } else if(body.error) {
             callback('Unable to find the location', undefined)
         } else {
-            callback(undefined, body.currently.summary +" " +       "It is currently " + body.currently.temperature + " degrees out. There is a "+ body.currently.precipProbability + " chance of rain")
+            
+            const celsius =()=>{
+                const fahrenhit = body.currently.temperature
+                return Math.ceil(((fahrenhit-32)*0.556))
+            }
+            callback(undefined, body.currently.icon +", " +       "It is currently " + celsius() + "°C out. There is a "+ body.currently.precipProbability + "% chance of rain.")
         }
     })
 }
