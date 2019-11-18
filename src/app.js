@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const geolocation = require('./utilities/geolocation')
 const forecast = require('./utilities/forecast')
 const app = express()
+const port = process.env.PORT ||3000
 
 //declare the path
 const publicDirectivePath = path.join(__dirname, '../public')
@@ -11,7 +12,7 @@ const templatePath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
 //Express view engine
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs')   
 app.set('views', templatePath)
 hbs.registerPartials(partialsPath)
 
@@ -78,6 +79,6 @@ app.get('*',(req, res)=>{
     res.render('404page')
 })
 
-app.listen("3000", ()=>{
-    console.log("Development server running on localhost 3000")
+app.listen(port, ()=>{
+    console.log("Development server running on port", port)
 })
